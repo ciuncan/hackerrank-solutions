@@ -17,21 +17,13 @@ enum Cloud {
     Cumulus,
     Thunderhead,
 }
-impl std::str::FromStr for Cloud {
-    type Err = ();
 
-    fn from_str(s: &str) -> std::result::Result<Self, ()> {
-        match s.chars().next() {
-            Some('0') => Ok(Cloud::Cumulus),
-            Some('1') => Ok(Cloud::Thunderhead),
-            _ => Err(()),
-        }
-    }
-}
-impl Default for Cloud {
-    fn default() -> Self {
-        Cloud::Cumulus
-    }
+use crate::enum_per_char;
+
+enum_per_char! { Cloud,
+    default => Cumulus,
+    '0' => Cumulus,
+    '1' => Thunderhead
 }
 
 fn calculate_total_cumps(clouds: &[Cloud]) -> usize {

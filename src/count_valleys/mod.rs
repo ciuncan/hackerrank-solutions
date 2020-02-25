@@ -1,7 +1,3 @@
-mod dir;
-
-use dir::Dir;
-
 use crate::lib;
 
 #[allow(dead_code)]
@@ -80,6 +76,29 @@ impl StepState {
             walks
         }
     }
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum Dir {
+    U,
+    D,
+}
+
+impl Dir {
+    pub fn level_diff(self) -> i32 {
+        match self {
+            Dir::U => 1,
+            Dir::D => -1,
+        }
+    }
+}
+
+use crate::enum_per_char;
+
+enum_per_char! { Dir,
+    default => U,
+    'U' => U,
+    'D' => D
 }
 
 #[cfg(test)]

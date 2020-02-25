@@ -41,3 +41,27 @@ impl<T: Debug + Sized> Tappable<T> for T {
         self
     }
 }
+
+#[macro_export]
+macro_rules! enum_per_char {
+    ($tpe: ty, default => $def:ident, $($c:expr => $v:ident),+) => {
+
+        impl std::str::FromStr for $tpe {
+            type Err = ();
+
+            fn from_str(s: &str) -> std::result::Result<Self, ()> {
+                match s.chars().next() {
+                    $(Some($c) => { Ok(<$tpe>::$v) }),+
+                    _ => Err(()),
+                }
+            }
+        }
+
+        impl Default for $tpe {
+            fn default() -> Self {
+                <$tpe>::$def
+            }
+        }
+
+    };
+}
