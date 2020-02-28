@@ -1,5 +1,8 @@
 use crate::lib;
 
+/// Solution for:
+/// https://www.hackerrank.com/challenges/repeated-string/problem
+
 #[allow(dead_code)]
 pub fn main() {
     let mut line = lib::read_std_line(None);

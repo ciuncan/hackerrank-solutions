@@ -1,5 +1,8 @@
 use crate::lib;
 
+/// Solution for:
+/// https://www.hackerrank.com/challenges/jumping-on-the-clouds/problem
+
 #[allow(dead_code)]
 pub fn main() {
     let clouds: Vec<Cloud> = lib::parse_two_line_input();

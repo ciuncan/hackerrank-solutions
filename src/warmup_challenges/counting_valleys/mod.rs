@@ -1,5 +1,8 @@
 use crate::lib;
 
+/// Solution for:
+/// https://www.hackerrank.com/challenges/counting-valleys/problem
+
 #[allow(dead_code)]
 pub fn main() {
     let steps: Vec<Dir> = lib::parse_two_line_input();
