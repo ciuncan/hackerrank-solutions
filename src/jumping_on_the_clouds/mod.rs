@@ -2,11 +2,7 @@ use crate::lib;
 
 #[allow(dead_code)]
 pub fn main() {
-    let mut line = lib::read_std_line(None);
-    let n = line.parse::<usize>().unwrap();
-
-    lib::read_std_line_into(&mut line, None);
-    let clouds: Vec<Cloud> = lib::parse_separated(&line, n);
+    let clouds: Vec<Cloud> = lib::parse_two_line_input();
 
     let total_jumps = calculate_total_cumps(&clouds);
 

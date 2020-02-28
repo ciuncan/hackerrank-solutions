@@ -2,13 +2,7 @@ use crate::lib;
 
 #[allow(dead_code)]
 pub fn main() {
-    let mut line = lib::read_std_line(Some("First line must have number of steps!"));
-    let n = line
-        .parse::<usize>()
-        .expect("First line must have number of steps!");
-
-    lib::read_std_line_into(&mut line, Some("Second line should contain steps!"));
-    let steps = lib::parse_separated::<Dir>(&line, n);
+    let steps: Vec<Dir> = lib::parse_two_line_input();
 
     let walk = Walk::new(StepState::walk(steps));
     let valley_count = walk.valley_count();

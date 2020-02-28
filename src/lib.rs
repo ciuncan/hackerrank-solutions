@@ -27,6 +27,14 @@ pub fn parse_separated<N: FromStr + Default>(line: &str, at_most: usize) -> Vec<
         .collect()
 }
 
+pub fn parse_two_line_input<N: FromStr + Default>() -> Vec<N> {
+    let mut line = read_std_line(None);
+    let n = line.parse::<usize>().unwrap();
+
+    read_std_line_into(&mut line, None);
+    parse_separated(&line, n)
+}
+
 pub trait Tappable<T: Sized>: Sized {
     fn tap(self) -> Self;
     fn tapl(self, label: &str) -> Self {

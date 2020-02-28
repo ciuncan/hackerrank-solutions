@@ -7,16 +7,7 @@ use crate::lib;
 
 #[allow(dead_code)]
 pub fn main() {
-    let mut line = lib::read_std_line(Some("Number of colors should be entered!"));
-
-    let n = line
-        .trim()
-        .parse::<usize>()
-        .expect("First line should have number of colors only!");
-
-    lib::read_std_line_into(&mut line, Some("Colors should be entered!"));
-
-    let numbers = lib::parse_separated::<u32>(&line, n);
+    let numbers: Vec<u32> = lib::parse_two_line_input();
 
     let counts = count_colors(&numbers);
     let pair_count = find_pair_count(&counts);
