@@ -20,6 +20,21 @@ pub fn read_std_line_into(line: &mut String, message: Option<&'static str>) {
     }
 }
 
+pub fn read_matrix_from_std<I: FromStr + Default>(n: usize, m: usize) -> Vec<Vec<I>> {
+    let mut lines = Vec::with_capacity(n);
+
+    if n > 0 {
+        let mut line = read_std_line(None);
+        lines.push(parse_separated(&line, m));
+
+        for _ in 1..n {
+            read_std_line_into(&mut line, None);
+            lines.push(parse_separated(&line, m));
+        }
+    }
+    lines
+}
+
 pub fn parse_separated<N: FromStr + Default>(line: &str, at_most: usize) -> Vec<N> {
     line.split_whitespace()
         .take(at_most)
