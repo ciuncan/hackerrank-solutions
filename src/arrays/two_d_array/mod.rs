@@ -16,16 +16,18 @@ struct Matrix<T>(Vec<Vec<T>>);
 struct Hourglasses<T>(Matrix<T>);
 
 impl Matrix<i8> {
-
     fn hourglass_at(&self, i: usize, j: usize) -> i8 {
         let matrix = &self.0;
         let (w, h) = (matrix[0].len(), matrix.len());
         if i < 1 || i > h - 2 || j < 1 || j > w - 2 {
-            panic!(format!("Hourglass at {:}, {:} is undefined for matrix {:}x{:}!", i, j, w, h));
+            panic!(format!(
+                "Hourglass at {:}, {:} is undefined for matrix {:}x{:}!",
+                i, j, w, h
+            ));
         }
         let mut sum = 0;
-        for ii in i-1..=i+1 {
-            for jj in j-1..=j+1 {
+        for ii in i - 1..=i + 1 {
+            for jj in j - 1..=j + 1 {
                 if jj != j && ii == i {
                     continue;
                 }
@@ -40,20 +42,22 @@ impl Matrix<i8> {
         let (w, h) = (matrix[0].len(), matrix.len());
         let mut hs = vec![vec![0; w - 2]; h - 2];
 
-        for i in 1..h-1 {
-            for j in 1..w-1 {
-                hs[i-1][j-1] = self.hourglass_at(i, j);
+        for i in 1..h - 1 {
+            for j in 1..w - 1 {
+                hs[i - 1][j - 1] = self.hourglass_at(i, j);
             }
         }
         Hourglasses(Matrix(hs))
     }
 
     fn max(&self) -> i8 {
-        self.0.iter().map(|r| *r.iter().max().unwrap()).max().unwrap()
+        self.0
+            .iter()
+            .map(|r| *r.iter().max().unwrap())
+            .max()
+            .unwrap()
     }
-
 }
-
 
 #[cfg(test)]
 mod tests {
@@ -110,5 +114,4 @@ mod tests {
         ]));
         assert_eq!(expected, matrix.hourglasses());
     }
-
 }
