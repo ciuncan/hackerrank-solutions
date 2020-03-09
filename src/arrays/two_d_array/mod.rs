@@ -66,32 +66,26 @@ mod tests {
 
     #[test]
     fn matrix_hourglass_simple() {
-        let matrix: Matrix<i8> = Matrix(vec![
-            vec![1, 1, 1],
-            vec![0, 1, 0],
-            vec![1, 1, 1],
-        ]);
-        let expected: Hourglasses<i8> = Hourglasses(Matrix(vec![
-            vec![7],
-        ]));
+        let matrix: Matrix<i8> = Matrix(vec![vec![1, 1, 1], vec![0, 1, 0], vec![1, 1, 1]]);
+        let expected: Hourglasses<i8> = Hourglasses(Matrix(vec![vec![7]]));
         assert_eq!(expected, matrix.hourglasses());
     }
 
     #[test]
     fn matrix_hourglass_sample1() {
         let matrix: Matrix<i8> = Matrix(vec![
-            vec![-9, -9, -9,  1, 1, 1, ],
-            vec![0, -9,  0,  4, 3, 2,],
-            vec![-9, -9, -9,  1, 2, 3,],
-            vec![0,  0,  8,  6, 6, 0,],
-            vec![0,  0,  0, -2, 0, 0,],
-            vec![0,  0,  1,  2, 4, 0,],
+            vec![-9, -9, -9, 1, 1, 1],
+            vec![0, -9, 0, 4, 3, 2],
+            vec![-9, -9, -9, 1, 2, 3],
+            vec![0, 0, 8, 6, 6, 0],
+            vec![0, 0, 0, -2, 0, 0],
+            vec![0, 0, 1, 2, 4, 0],
         ]);
         let expected: Hourglasses<i8> = Hourglasses(Matrix(vec![
-            vec![-63, -34, -9, 12, ],
-            vec![-10, 0, 28, 23, ],
-            vec![-27, -11, -2, 10, ],
-            vec![9, 17, 25, 18,],
+            vec![-63, -34, -9, 12],
+            vec![-10, 0, 28, 23],
+            vec![-27, -11, -2, 10],
+            vec![9, 17, 25, 18],
         ]));
         assert_eq!(expected, matrix.hourglasses());
     }
@@ -107,10 +101,10 @@ mod tests {
             vec![0, 0, 1, 2, 4, 0],
         ]);
         let expected: Hourglasses<i8> = Hourglasses(Matrix(vec![
-            vec![ 7,  4,  2,  0],
-            vec![ 4,  8, 10,  8],
-            vec![ 3,  6,  7,  6],
-            vec![ 2,  9, 19, 14],
+            vec![7, 4, 2, 0],
+            vec![4, 8, 10, 8],
+            vec![3, 6, 7, 6],
+            vec![3, 9, 19, 14],
         ]));
         assert_eq!(expected, matrix.hourglasses());
     }
