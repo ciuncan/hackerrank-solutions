@@ -1,4 +1,5 @@
 mod left_rotation;
+mod minimum_swaps_two;
 mod new_year_chaos;
 mod two_d_array;
 /// https://www.hackerrank.com/interview/interview-preparation-kit/arrays/challenges
@@ -7,5 +8,6 @@ mod two_d_array;
 pub fn main() {
     // two_d_array::main();
     // left_rotation::main();
-    new_year_chaos::main();
+    // new_year_chaos::main();
+    minimum_swaps_two::main();
 }
