@@ -67,7 +67,12 @@ impl<T: Debug + Sized> Tappable<T> for T {
 
 #[macro_export]
 macro_rules! enum_per_char {
-    ($tpe: ty, default => $def:ident, $($c:expr => $v:ident),+) => {
+    (type = $tpe:ident; default => $def:ident; $($c:expr => $v:ident),+) => {
+
+        #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+        pub enum $tpe {
+            $( $v ),+
+        }
 
         impl std::str::FromStr for $tpe {
             type Err = ();

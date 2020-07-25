@@ -75,10 +75,11 @@ impl StepState {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
-pub enum Dir {
-    U,
-    D,
+use crate::enum_per_char;
+
+enum_per_char! { type = Dir; default => U;
+    'U' => U,
+    'D' => D
 }
 
 impl Dir {
@@ -90,13 +91,6 @@ impl Dir {
     }
 }
 
-use crate::enum_per_char;
-
-enum_per_char! { Dir,
-    default => U,
-    'U' => U,
-    'D' => D
-}
 
 #[cfg(test)]
 mod tests {

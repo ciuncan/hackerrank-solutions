@@ -7,25 +7,19 @@ use crate::lib;
 pub fn main() {
     let clouds: Vec<Cloud> = lib::parse_two_line_input();
 
-    let total_jumps = calculate_total_cumps(&clouds);
+    let total_jumps = calculate_total_jumps(&clouds);
 
     println!("{:}", total_jumps);
 }
 
-enum Cloud {
-    Cumulus,
-    Thunderhead,
-}
-
 use crate::enum_per_char;
 
-enum_per_char! { Cloud,
-    default => Cumulus,
+enum_per_char! { type = Cloud; default => Cumulus;
     '0' => Cumulus,
     '1' => Thunderhead
 }
 
-fn calculate_total_cumps(clouds: &[Cloud]) -> usize {
+fn calculate_total_jumps(clouds: &[Cloud]) -> usize {
     let run_lengths = cumulus_run_lengths(&clouds);
     run_lengths
         .iter()
@@ -101,7 +95,7 @@ mod tests {
             Cloud::Cumulus,
         ];
 
-        let actual = calculate_total_cumps(&run);
+        let actual = calculate_total_jumps(&run);
         let expected = 4;
 
         assert_eq!(expected, actual);
@@ -119,7 +113,7 @@ mod tests {
             Cloud::Cumulus,
         ];
         let expected = 3;
-        let actual = calculate_total_cumps(&run);
+        let actual = calculate_total_jumps(&run);
         assert_eq!(expected, actual);
     }
 }
