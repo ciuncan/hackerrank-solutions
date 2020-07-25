@@ -52,13 +52,20 @@ pub fn parse_two_line_input<N: FromStr + Default>() -> Vec<N> {
 
 pub trait Tappable<T: Sized>: Sized {
     fn tap(self) -> Self;
-    fn tapl(self, label: &str) -> Self {
-        print!("{:}: ", label);
+    fn tap_key(self, key: &str) -> Self {
+        print!("{:}: ", key);
         self.tap()
     }
 }
 
-impl<T: Debug + Sized> Tappable<T> for T {
+impl<T: Debug> Tappable<T> for &T {
+    fn tap(self) -> Self {
+        println!("{:?}", self);
+        self
+    }
+}
+
+impl<T: Debug> Tappable<T> for &mut T {
     fn tap(self) -> Self {
         println!("{:?}", self);
         self
@@ -75,12 +82,13 @@ macro_rules! enum_per_char {
         }
 
         impl std::str::FromStr for $tpe {
-            type Err = ();
+            type Err = String;
 
-            fn from_str(s: &str) -> std::result::Result<Self, ()> {
+            fn from_str(s: &str) -> std::result::Result<Self, String> {
                 match s.chars().next() {
-                    $(Some($c) => { Ok(<$tpe>::$v) }),+
-                    _ => Err(()),
+                    $(Some($c)  => { Ok(<$tpe>::$v) }),+
+                    Some(c)     => Err(format!("Unknown character c={} for type $tpe", c)),
+                    None        => Err(String::from("No more input left to parse type $tpe")),
                 }
             }
         }
